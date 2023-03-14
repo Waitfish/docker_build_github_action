@@ -20,7 +20,6 @@ env:
   REGISTRY: docker.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ secrets.DOCKER_HUB_USER }}/docker_build_github_action
-  BUILD_TIME_TAG: $(date +%s)
 
 jobs:
   build:
@@ -74,7 +73,7 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}_${{env.BUILD_TIME_TAG}}
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
